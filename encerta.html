@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encerta</title>
+</head>
+<body>
+    <input type="number" name="numero" id="numero" min="0" max="10" required>
+    <button onclick="compara()">COMPARA</button>
+    <p id="resultado"></p>
+
+
+    <script>
+
+        function compara() {
+            const num2 = document.querySelector('input[type="number"]').value;
+            const num1 = localStorage.getItem('valor1');
+            const resultado = document.getElementById('resultado');
+
+            
+            if(Number(num2) === Number(num1)) {
+                resultado.innerHTML = `FELICIDADES &#127881! El valor del input (${num2}) es igual al numero aleatorio (${num1})`; //&#127881 codigo de entidad HTML para celebracion
+                document.cookie = "adivinado=true; path=/";
+            } else {
+                resultado.innerHTML = `El valor del input (${num2}) NO es igual al numero aleatorio (${num1})`;
+                document.cookie = "adivinado=false; path=/";
+
+                //Cerrarla a los 7 segundos
+                setTimeout(function() {
+                    window.close();
+                }, 7000);
+            }
+
+            localStorage.setItem('valor2', num2);
+
+            let numIntentos = localStorage.getItem('numIntentos');
+            if(!numIntentos) { //si es "" o undefined, si aun no existe
+                localStorage.setItem('numIntentos', "1");
+            } else {
+                numIntentos = Number(numIntentos) + 1;
+                localStorage.setItem('numIntentos', String(numIntentos));
+            }
+            
+            
+        }
+        
+    </script>
+</body>
+</html>

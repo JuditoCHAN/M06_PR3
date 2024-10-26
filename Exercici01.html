@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercici 1</title>
+</head>
+<body>
+    <button id="btnColor" onclick="colorBoton()">PLAY ENCERTA</button>
+    <p id="resultado"></p>
+    <p id="numIntentos"></p>
+    <p id="ultimoIntento"></p>
+
+    <button id="reiniciaIntentos" onclick="reiniciaIntentos()">Reinicia numero de intentos</button>
+
+    <script>
+        let nuevaVentana; 
+        let numIntentos;
+
+        function colorBoton() {
+            const num1 = Math.floor(Math.random() * 11);
+            
+            if(num1 < 5) {
+                document.getElementById('btnColor').style.backgroundColor = "red";
+            } else {
+                document.getElementById('btnColor').style.backgroundColor = "green";
+            }
+
+            //localStorage almacena datos de las ventanas (incluso si se cierran)
+            localStorage.setItem('valor1', num1);
+            
+            abrirNuevaVentana();
+            //nuevaVentana.num1 = num1; //en encerta.html con window.opener lo obtenemos
+        }
+
+
+        function abrirNuevaVentana() {
+            nuevaVentana = window.open("encerta.html", "_blank", "width=600,height=400,left=300,top=100,resizable=no");
+        }
+
+
+        window.addEventListener('storage', function(event){
+            if(event.key === 'valor2') {
+                mostrarResultado();
+            }
+            if(event.key === 'numIntentos') {
+                mostrarIntentos();
+            }
+        })
+
+
+        function mostrarResultado() {
+            const valorVentanaPadre = localStorage.getItem('valor1');
+            const valorVentanaHija = localStorage.getItem('valor2');
+
+            if(valorVentanaHija === valorVentanaPadre) {
+                document.getElementById('resultado').innerHTML = `FELICIDADES &#127881! El valor del input (${valorVentanaHija}) es igual al numero aleatorio (${valorVentanaPadre})`; //&#127881 codigo de entidad HTML para celebracion
+                nuevaVentana.close();
+            } else {
+                document.getElementById('resultado').innerHTML = `El valor del input (${valorVentanaHija}) NO es igual al numero aleatorio (${valorVentanaPadre})`;
+            }
+        }
+
+
+        function mostrarIntentos() {
+            numIntentos = document.getElementById('numIntentos');
+            numIntentos.innerHTML = `Numero de intentos: ${localStorage.getItem('numIntentos')}`;
+
+            mostrarUltimoIntento();
+        }
+
+        
+        function reiniciaIntentos() {
+            localStorage.removeItem('numIntentos');
+            //mostrarIntentos(); //lo pone a null
+            document.getElementById('numIntentos').innerHTML = `Numero de intentos: 0`;
+            document.getElementById('ultimoIntento').innerHTML = "";
+        }
+
+
+        function getCookieValue(nombreCookie) {
+            const cookies = document.cookie.split("; ");
+            for(let i = 0; i < cookies.length; i++) {
+                const [key, value] = cookies[i].split("=");
+                if(key === nombreCookie) {
+                    return value;
+                }
+            }
+            return "sin valor";
+        }
+
+
+        function mostrarUltimoIntento() {
+            const ultimoIntento = getCookieValue("adivinado");
+
+            document.getElementById('ultimoIntento').innerHTML = `¿Se acertó el último intento?: ${ultimoIntento}`;
+        }
+
+    </script>
+</body>
+</html>
