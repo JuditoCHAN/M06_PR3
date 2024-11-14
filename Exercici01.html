@@ -7,23 +7,28 @@
 </head>
 <body>
     <button id="btnColor" onclick="colorBoton()">PLAY ENCERTA</button>
+    <p id="numero"></p>
     <p id="resultado"></p>
     <p id="numIntentos"></p>
     <p id="ultimoIntento"></p>
 
     <button id="reiniciaIntentos" onclick="reiniciaIntentos()">Reinicia numero de intentos</button>
 
+
+
+    
     <script>
         let nuevaVentana; 
         let numIntentos;
 
         function colorBoton() {
             const num1 = Math.floor(Math.random() * 11);
-            
+            document.getElementById('numero').innerHTML = num1;
+
             if(num1 < 5) {
-                document.getElementById('btnColor').style.backgroundColor = "red";
+                document.getElementById('numero').style.backgroundColor = "lightcoral";
             } else {
-                document.getElementById('btnColor').style.backgroundColor = "green";
+                document.getElementById('numero').style.backgroundColor = "lightgreen";
             }
 
             //localStorage almacena datos de las ventanas (incluso si se cierran)
@@ -39,7 +44,7 @@
         }
 
 
-        window.addEventListener('storage', function(event){
+        window.addEventListener('storage', (event) => { //==funcion(event) {}
             if(event.key === 'valor2') {
                 mostrarResultado();
             }
