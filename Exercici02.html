@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,26 +18,49 @@
             font-style: normal;
             font-size: 20px;
         }
+
+        button {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <button id="button">START</button>
-        <p id="countdown"></p>
-        <p id="contador"></p>
-        <p>Valor primera ventana clicada: <span id="valueWindow1"></span></p>
-        <p>Valor segunda ventana clicada: <span id="valueWindow2"></span></p>
-        <p id="error"></p>
-        <p id="message"></p>
-        <button onclick="endGame()">Finalizar</button>
-        <p id="numOfWindows"></p>
+    <div class="container card shadow">
+        <div class="d-flex justify-content-center">
+            <button id="button" class="btn btn-success btn-lg mt-3 shadow">START</button>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <p id="countdown" class="fw-bold fs-3"></p>
+        </div>
+
+        <p id="contador" class="text-center"></p>
+
+        <p class="text-center">Valor primera ventana clicada: <span id="valueWindow1" class="fw-bold fs-5"></span></p>
+
+        <p class="text-center">Valor segunda ventana clicada: <span id="valueWindow2" class="fw-bold fs-5"></span></p>
+
+        <p id="error" class="text-center"></p>
+
+        <p id="message" class="text-center fs-3"></p>
+
+        <div class="d-flex justify-content-center">
+            <button onclick="endGame()" class="btn btn-primary btn-lg shadow">Finalizar</button>
+        </div>
+
+        <p id="numOfWindows" class="text-center"></p>
     </div>
 
-    <hr>
 
-    <div id="lastGame" class="container">
-        <p id="lastGameResult"></p>
-        <p id="lastGameNumOfWindows"></p>
+    <br>
+
+
+    <div class="container card shadow">
+        <p id="lastGameResult" class="text-center mt-3"></p>
+
+        <p id="lastGameNumOfWindows" class="text-center"></p>
     </div>
 </body>
 </html>

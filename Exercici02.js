@@ -39,6 +39,9 @@ showLastGameResults();
 
 //muestra countdown de 30 segundos
 document.getElementById('button').addEventListener('click', () => {
+    document.getElementById('numOfWindows').innerHTML = "";
+    document.getElementById('message').innerHTML = "";
+
     let segundos = 30;
     contadorVentanas = 0; //reinicio por si el das a START despues de haber jugado 1 partida
     contadorVentanasCreadas = 0;
@@ -51,7 +54,7 @@ document.getElementById('button').addEventListener('click', () => {
                 countdownOn = false;
                 document.getElementById('message').classList.remove('text-success'); //elimino si tenia clase aplicada anteriormente
                 document.getElementById('message').classList.add('text-danger'); //añado la clase de bootstrap xra darle color rojo al mensaje
-                document.getElementById('message').innerHTML = 'Perdiste! Vuélvelo a intentar';
+                document.getElementById('message').innerHTML = '¡Perdiste! Vuélvelo a intentar.';
                 localStorage.setItem('numVentanas', `Número de ventanas creadas en la última partida: ${contadorVentanasCreadas}`);
                 localStorage.setItem('lastGameResult', 'Perdiste la última partida');
                 clearInterval(checkCountIsZeroInterval);
@@ -77,7 +80,7 @@ document.getElementById('button').addEventListener('click', () => {
                 clearInterval(countdownInterval);
                 document.getElementById('message').classList.remove('text-danger'); //elimino si tenia clase aplicada anteriormente
                 document.getElementById('message').classList.add('text-success'); //añado la clase de bootstrap xra darle color verde al mensaje
-                document.getElementById('message').innerHTML = 'Enhorabuena! Has ganado';
+                document.getElementById('message').innerHTML = '¡Enhorabuena! Has ganado.';
                 countdownOn = false;
                 localStorage.setItem('numVentanas', `Número de ventanas creadas en la última partida: ${contadorVentanasCreadas}`);
                 localStorage.setItem('lastGameResult', 'Ganaste la última partida');
@@ -231,7 +234,7 @@ function endGame() {
 
     document.getElementById('message').classList.remove('text-success'); //elimino si tenia clase aplicada anteriormente
     document.getElementById('message').classList.add('text-danger'); //añado la clase de bootstrap xra darle color rojo al mensaje
-    document.getElementById('message').innerHTML = 'Perdiste! Vuélvelo a intentar';
+    document.getElementById('message').innerHTML = '¡Perdiste! Vuélvelo a intentar.';
     localStorage.setItem('numVentanas', `Número de ventanas creadas en la última partida: ${contadorVentanasCreadas}`);
     localStorage.setItem('lastGameResult', 'Perdiste la última partida');
 
